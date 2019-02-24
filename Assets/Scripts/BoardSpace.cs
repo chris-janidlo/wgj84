@@ -6,6 +6,8 @@ using UnityEngine;
 public class BoardSpace : MonoBehaviour
 {
     public Vector2Int Position;
+    [Tooltip("Used for positioning pieces visually")]
+    public Vector3 OffsetFromGroundLevel;
 
     [SerializeField]
     BoardPiece _currentPiece;
@@ -27,4 +29,6 @@ public class BoardSpace : MonoBehaviour
             }
         }
     }
+
+    public Vector3 GroundLevel => transform.position + OffsetFromGroundLevel;
 }

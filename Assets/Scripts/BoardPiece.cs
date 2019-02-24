@@ -29,6 +29,11 @@ public class BoardPiece : MonoBehaviour
     public Vector2Int Position => Space.Position;
     public float PercentHealth => (float) Health / StartingHealth;
 
+    void Update ()
+    {
+        transform.position = Vector3.Lerp(transform.position, Space.GroundLevel, 0.5f * Time.deltaTime);
+    }
+
     void die ()
     {
         Destroy(gameObject);
