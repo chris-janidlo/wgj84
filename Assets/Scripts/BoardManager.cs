@@ -84,6 +84,6 @@ public class BoardManager : Singleton<BoardManager>
     // works as expected on negative numbers
     int truemod (int a, int b)
     {
-        return (a % b + b) % b;
+        return (int) Mathf.Repeat(a, b);
     }
 }
