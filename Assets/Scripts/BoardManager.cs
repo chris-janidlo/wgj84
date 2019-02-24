@@ -7,12 +7,14 @@ using crass;
 
 public class BoardManager : Singleton<BoardManager>
 {
-    public Dictionary<Vector2Int, BoardSpace> SpaceLookup => Spaces.ToDictionary(s => s.Position);
-    public List<BoardSpace> Spaces;
+    public Dictionary<Vector2Int, BoardSpace> SpaceLookup => spaces.ToDictionary(s => s.Position);
+    
+    List<BoardSpace> spaces;
 
     void Start ()
     {
         SingletonSetInstance(this, true);
+        spaces = GetComponentsInChildren<BoardSpace>().ToList();
     }
 
     // returns a list of all spaces within range of center for which filter is true
