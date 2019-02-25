@@ -7,7 +7,9 @@ using UnityEngine.EventSystems;
 
 public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-	public Color NormalColor, HighlightedColor, PressedColor;
+	public Color NormalColor = Color.white,
+	             HighlightedColor = Color.white,
+				 PressedColor = Color.white;
 	// TODO:
 	// public float FadeDuration;
 
@@ -35,6 +37,7 @@ public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     void Awake ()
     {
         rend = GetComponent<Renderer>();
+		rend.material.color = NormalColor;
     }
 
 	public void OnPointerEnter (PointerEventData eventData)
