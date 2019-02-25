@@ -22,11 +22,6 @@ public class BoardSpace : MonoBehaviour
             }
 
             _currentPiece = value;
-
-            if (value != null)
-            {
-                _currentPiece.Space = this;
-            }
         }
     }
 

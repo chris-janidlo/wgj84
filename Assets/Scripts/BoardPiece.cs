@@ -9,7 +9,11 @@ public class BoardPiece : MonoBehaviour
     public AttackType Type;
     public int StartingHealth;
     public int Speed;
+    public List<Attack> Antagonisms, Supports;
     public BoardSpace Space;
+    public bool HasMoved, HasAttacked;
+
+    int currentAnt, currentSup;
 
     [SerializeField]
     int _health;
@@ -28,6 +32,8 @@ public class BoardPiece : MonoBehaviour
 
     public Vector2Int Position => Space.Position;
     public float PercentHealth => (float) Health / StartingHealth;
+    public Attack NextAntagonism => Antagonisms[currentAnt];
+    public Attack NextSupport => Supports[currentSup];
 
     void Start ()
     {
@@ -37,6 +43,19 @@ public class BoardPiece : MonoBehaviour
     void Update ()
     {
         transform.position = Vector3.Lerp(transform.position, Space.GroundLevel, 0.5f * Time.deltaTime);
+    }
+
+    public Attack PopAttack (AttackCategory category)
+    {
+        bool isAnt = category == AttackCategory.Antagonistic;
+        var temp = isAnt ? NextAntagonism : NextSupport;
+        
+        if (isAnt)
+            currentAnt++;
+        else
+            currentSup++;
+
+        return temp;
     }
 
     void die ()

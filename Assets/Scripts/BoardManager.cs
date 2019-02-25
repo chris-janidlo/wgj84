@@ -44,7 +44,7 @@ public class BoardManager : Singleton<BoardManager>
     }
 
     // TODO: test me
-    public float CoverAmount (BoardPiece target, BoardPiece shooter)
+    public CoverData GetCover (BoardPiece target, BoardPiece shooter)
     {
         Vector2Int tpos = target.Position, spos = shooter.Position;
         Vector2 coverDir = ((Vector2) spos - tpos);
@@ -74,16 +74,76 @@ public class BoardManager : Singleton<BoardManager>
         SpaceLookup.TryGetValue(coverPositions[octant], out middleSpace);
         SpaceLookup.TryGetValue(coverPositions[truemod((octant + 1), 8)], out rightSpace);
 
-        float leftCover = leftSpace?.CurrentPiece?.PercentHealth ?? 0;
-        float middleCover = middleSpace?.CurrentPiece?.PercentHealth ?? 0;
-        float rightCover = rightSpace?.CurrentPiece?.PercentHealth ?? 0;
+        return new CoverData
+        {
+            LeftCover = leftSpace?.CurrentPiece,
+            MiddleCover = middleSpace?.CurrentPiece,
+            RightCover = rightSpace?.CurrentPiece
+        };
+    }
 
-        return Mathf.Max(leftCover / 2, middleCover, rightCover / 2);
+    // returns true if hit, false if miss
+    public bool DoAttack (AttackCategory category, BoardPiece target, BoardPiece shooter)
+    {
+        shooter.HasAttacked = true;
+        var attack = shooter.PopAttack(category);
+        var coverHit = GetCover(target, shooter).TryHit();
+
+        if (coverHit == null)
+        {
+            target.Health -= attack.Damage;
+            return true;
+        }
+        else
+        {
+            coverHit.Health -= attack.Damage;
+            return false;
+        }
+    }
+
+    public void DoMove (BoardPiece mover, BoardSpace target)
+    {
+        mover.HasMoved = true;
+        mover.Space.CurrentPiece = null;
+        mover.Space = target;
+        target.CurrentPiece = mover;
     }
 
     // works as expected on negative numbers
     int truemod (int a, int b)
     {
         return (int) Mathf.Repeat(a, b);
+    }
+}
+
+public struct CoverData
+{
+    public BoardPiece LeftCover;
+    public BoardPiece MiddleCover;
+    public BoardPiece RightCover;
+    
+    public float OverallChance => leftChance + middleChance + rightChance;
+
+    float leftChance => (LeftCover?.PercentHealth ?? 0) / 2;
+    float middleChance => (MiddleCover?.PercentHealth ?? 0) / 2;
+    float rightChance => (RightCover?.PercentHealth ?? 0) / 2;
+
+    // returns the piece that is hit from cover fire, if there is one, otherwise null
+    public BoardPiece TryHit ()
+    {
+        // check middle first since we like it more
+        if (RandomExtra.Chance(middleChance))
+        {
+            return MiddleCover;
+        }
+        if (RandomExtra.Chance(leftChance))
+        {
+            return LeftCover;
+        }
+        if (RandomExtra.Chance(rightChance))
+        {
+            return RightCover;
+        }
+        return null;
     }
 }
