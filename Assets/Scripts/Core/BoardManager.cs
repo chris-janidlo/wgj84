@@ -28,7 +28,9 @@ public class BoardManager : Singleton<BoardManager>
             for (int y = center.y - range; y <= center.y + range; y++)
             {
                 Vector2Int point = new Vector2Int(x, y);
-                BoardSpace space = SpaceLookup[point];
+                BoardSpace space;
+                SpaceLookup.TryGetValue(point, out space);
+                if (space == null) continue;
 
                 bool inRange = (point - center).sqrMagnitude <= range * range;
                 bool isValid = (filter != null) ? filter(space) : true;

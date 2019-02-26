@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef5af6988ad4b31b8288621f4a853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Humility
+  Name: Neuroticism
   Team: 0
   Type: 2
   StartingHealth: 50
@@ -4276,7 +4276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef5af6988ad4b31b8288621f4a853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Humility
+  Name: Competition
   Team: 0
   Type: 1
   StartingHealth: 200
@@ -5197,6 +5197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1396229867}
+  - component: {fileID: 1396229868}
   m_Layer: 5
   m_Name: UI State Manager
   m_TagString: Untagged
@@ -5223,6 +5224,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1396229868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396229866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ee24afc21a14cd2abb879e54a918b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPieces:
+  - {fileID: 128192152846149442}
+  - {fileID: 1010678909}
+  - {fileID: 88046785}
+  ActionSelectContainer: {fileID: 668861157}
+  MoveMenuContainer: {fileID: 947433501}
+  ActMenuContainer: {fileID: 1374577043}
+  MoveButton: {fileID: 2078845097}
+  ActButton: {fileID: 20609638}
+  AntagonizeButton: {fileID: 792813479}
+  SupportButton: {fileID: 619796884}
+  ContextButton: {fileID: 2059532647}
+  NameplateText: {fileID: 98542205}
+  ContextButtonText: {fileID: 2059532646}
+  AntagonizeText: {fileID: 792813478}
+  SupportText: {fileID: 619796883}
 --- !u!1 &1418175487
 GameObject:
   m_ObjectHideFlags: 0
