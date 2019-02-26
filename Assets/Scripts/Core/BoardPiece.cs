@@ -58,6 +58,18 @@ public class BoardPiece : MonoBehaviour
         return temp;
     }
 
+    public Attack PeekAttack (AttackCategory category)
+    {
+        if (category == AttackCategory.Antagonistic)
+        {
+            return NextAntagonism;
+        }
+        else
+        {
+            return NextSupport;
+        }
+    }
+
     void die ()
     {
         Destroy(gameObject);
