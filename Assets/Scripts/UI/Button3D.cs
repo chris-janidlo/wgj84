@@ -13,7 +13,7 @@ public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	// TODO:
 	// public float FadeDuration;
 
-	public Action OnPointerEnterCallback, OnPointerExitCallback, OnClickCallback;
+	public event EventHandler OnPointerEnterCallback, OnPointerExitCallback, OnClickCallback;
 
     [SerializeField]
 	bool _clickable = true;
@@ -74,9 +74,9 @@ public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		if (hovered) threadSafeCallback(OnClickCallback);
 	}
 
-    void threadSafeCallback (Action callback)
+    void threadSafeCallback (EventHandler callback)
     {
-        Action temp = callback;
-        if (temp != null) temp();
+        EventHandler temp = callback;
+        if (temp != null) temp(this, null);
     }
 }
