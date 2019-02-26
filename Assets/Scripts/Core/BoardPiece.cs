@@ -42,7 +42,7 @@ public class BoardPiece : MonoBehaviour
 
     void Update ()
     {
-        transform.position = Vector3.Lerp(transform.position, Space.GroundLevel, 0.5f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, Space.GroundLevel, 0.8f * Time.deltaTime);
     }
 
     public Attack PopAttack (AttackCategory category)
