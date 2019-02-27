@@ -26,4 +26,12 @@ public class BoardSpace : MonoBehaviour
     }
 
     public Vector3 GroundLevel => transform.position + OffsetFromGroundLevel;
+
+    void Start ()
+    {
+        if (CurrentPiece != null && CurrentPiece.Space == null)
+        {
+            CurrentPiece.Space = this;
+        }
+    }
 }

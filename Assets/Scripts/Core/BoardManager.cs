@@ -34,6 +34,7 @@ public class BoardManager : Singleton<BoardManager>
 
                 bool inRange = (point - center).sqrMagnitude <= range * range;
                 bool isValid = (filter != null) ? filter(space) : true;
+                Debug.Log(filter);
 
                 if (inRange && isValid)
                 {

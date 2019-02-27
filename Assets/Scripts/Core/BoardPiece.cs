@@ -38,6 +38,10 @@ public class BoardPiece : MonoBehaviour
     void Start ()
     {
         Health = StartingHealth;
+        if (Space.CurrentPiece == null)
+        {
+            Space.CurrentPiece = this;
+        }
     }
 
     void Update ()
