@@ -34,7 +34,7 @@ public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     Renderer rend;
 
-    void Awake ()
+    protected virtual void Awake ()
     {
         rend = GetComponent<Renderer>();
 		rend.material.color = NormalColor;

@@ -5,16 +5,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using crass;
 
-public class BoardManager : Singleton<BoardManager>
+public class Board
 {
-    public Dictionary<Vector2Int, BoardSpace> SpaceLookup => spaces.ToDictionary(s => s.Position);
-    
-    List<BoardSpace> spaces;
+    Dictionary<BoardSpace, BoardPiece> state;
 
-    void Start ()
+    public Board (Dictionary<BoardSpace, BoardPiece> startingState)
     {
-        SingletonSetInstance(this, true);
-        spaces = GetComponentsInChildren<BoardSpace>().ToList();
+        state = startingState;
+    }
+
+    public BoardSpace TryGetSpace (Vector2Int coordinate)
+    {
+        return state.Keys.SingleOrDefault(s => s.Position == coordinate);
+    }
+
+    public BoardSpace GetSpace (BoardPiece piece)
+    {
+        // if a piece exists, it must be on a space. if there is no space, that's an issue elsewhere
+        return state.Single(x => x.Value == piece).Key;
+    }
+
+    public BoardPiece TryGetPiece (Vector2Int coordinate)
+    {
+        var space = TryGetSpace(coordinate);
+        if (space == null)
+        {
+            return null;
+        }
+        else
+        {
+            return TryGetPiece(space);
+        }
+    }
+
+    public BoardPiece TryGetPiece (BoardSpace space)
+    {
+        BoardPiece p;
+        state.TryGetValue(space, out p);
+        return p;
     }
 
     // returns a list of all spaces within range of center for which filter is true
@@ -28,8 +56,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int y = center.y - range; y <= center.y + range; y++)
             {
                 Vector2Int point = new Vector2Int(x, y);
-                BoardSpace space;
-                SpaceLookup.TryGetValue(point, out space);
+                var space = TryGetSpace(point);
                 if (space == null) continue;
 
                 bool inRange = (point - center).sqrMagnitude <= range * range;
@@ -46,10 +73,31 @@ public class BoardManager : Singleton<BoardManager>
         return circle.ToList();
     }
 
+    public List<BoardSpace> GetMovableSpaces (BoardPiece mover)
+    {
+        return GetCircle
+        (
+            GetSpace(mover).Position,
+            mover.Speed,
+            s => state[s] == null
+        );
+    }
+
+    public List<BoardPiece> GetAttackablePieces (BoardPiece attacker, AttackCategory category)
+    {
+        return GetCircle
+        (
+            GetSpace(attacker).Position,
+            attacker.PeekAttack(category).Range,
+            s => state[s] != null && state[s].Team != attacker.Team
+        )
+        .Select(s => state[s]).ToList();
+    }
+
     // TODO: test me
     public CoverData GetCover (BoardPiece target, BoardPiece shooter)
     {
-        Vector2Int tpos = target.Position, spos = shooter.Position;
+        Vector2Int tpos = GetSpace(target).Position, spos = GetSpace(shooter).Position;
         Vector2 coverDir = ((Vector2) spos - tpos);
         int angle = (int) Vector2.Angle(Vector2.up, coverDir);
 
@@ -71,17 +119,11 @@ public class BoardManager : Singleton<BoardManager>
             new Vector2Int(-1, 1)
         };
 
-        BoardSpace leftSpace, middleSpace, rightSpace;
-
-        SpaceLookup.TryGetValue(coverPositions[truemod((octant - 1), 8)], out leftSpace);
-        SpaceLookup.TryGetValue(coverPositions[octant], out middleSpace);
-        SpaceLookup.TryGetValue(coverPositions[truemod((octant + 1), 8)], out rightSpace);
-
         return new CoverData
         {
-            LeftCover = leftSpace?.CurrentPiece,
-            MiddleCover = middleSpace?.CurrentPiece,
-            RightCover = rightSpace?.CurrentPiece
+            LeftCover = TryGetPiece(coverPositions[truemod((octant - 1), 8)]),
+            MiddleCover = TryGetPiece(coverPositions[octant]),
+            RightCover = TryGetPiece(coverPositions[truemod((octant + 1), 8)])
         };
     }
 
@@ -107,9 +149,21 @@ public class BoardManager : Singleton<BoardManager>
     public void DoMove (BoardPiece mover, BoardSpace target)
     {
         mover.HasMoved = true;
-        mover.Space.CurrentPiece = null;
-        mover.Space = target;
-        target.CurrentPiece = mover;
+        var oldSpace = GetSpace(mover);
+        state[oldSpace] = null;
+        state[target] = mover;
+    }
+
+    public Board Clone ()
+    {
+        Dictionary<BoardSpace, BoardPiece> copy = new Dictionary<BoardSpace, BoardPiece>();
+
+        foreach (var s in state.Keys)
+        {
+            copy.Add(s.Clone(), TryGetPiece(s)?.Clone());
+        }
+
+        return new Board(copy);
     }
 
     // works as expected on negative numbers

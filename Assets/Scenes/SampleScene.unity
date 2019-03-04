@@ -142,7 +142,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4, y: 0.29, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1010678910}
   m_Father: {fileID: 895563906}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -216,9 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -4, y: -1}
+  Properties:
+    Position: {x: -4, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &20609635
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +509,6 @@ GameObject:
   m_Component:
   - component: {fileID: 88046786}
   - component: {fileID: 88046785}
-  - component: {fileID: 88046784}
   - component: {fileID: 88046783}
   - component: {fileID: 88046782}
   - component: {fileID: 88046781}
@@ -577,22 +577,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88046780}
   m_Mesh: {fileID: 4300000, guid: 03424ba550bea459a865fc0dd71dd777, type: 3}
---- !u!114 &88046784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88046780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb4ac2b49503412eada95cd6f002aeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NormalColor: {r: 0.8666667, g: 0.92156863, b: 0.7137255, a: 1}
-  HighlightedColor: {r: 0.7647059, g: 0.6784314, b: 0.3372549, a: 1}
-  PressedColor: {r: 0.3019608, g: 0.0627451, b: 0.03529412, a: 1}
-  _clickable: 1
 --- !u!114 &88046785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,17 +589,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef5af6988ad4b31b8288621f4a853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Neuroticism
-  Team: 0
-  Type: 2
-  StartingHealth: 50
-  Speed: 6
-  Antagonisms: []
-  Supports: []
-  Space: {fileID: 1173488821}
-  HasMoved: 0
-  HasAttacked: 0
-  _health: 0
+  NormalColor: {r: 0.8666667, g: 0.92156863, b: 0.7137255, a: 1}
+  HighlightedColor: {r: 0.7647059, g: 0.6784314, b: 0.3372549, a: 1}
+  PressedColor: {r: 0.46666667, g: 0.23137255, b: 0.10980392, a: 1}
+  _clickable: 1
+  Properties:
+    Name: Neuroticism
+    Team: 0
+    Type: 2
+    StartingHealth: 50
+    Speed: 6
+    Antagonisms: []
+    Supports: []
+    HasMoved: 0
+    HasAttacked: 0
+    _health: 0
 --- !u!4 &88046786
 Transform:
   m_ObjectHideFlags: 0
@@ -623,12 +611,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88046780}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1176909886}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &98542203
 GameObject:
@@ -1100,7 +1088,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
@@ -1275,9 +1263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 4, y: 0}
+  Properties:
+    Position: {x: 4, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &189223563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,9 +1444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 3, y: 1}
+  Properties:
+    Position: {x: 3, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1576,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 128192152846252896}
   m_Father: {fileID: 895563906}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1662,9 +1651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -4, y: 0}
+  Properties:
+    Position: {x: -4, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &316140256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1769,9 +1758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 1, y: 1}
+  Properties:
+    Position: {x: 1, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &368078819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,9 +1865,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -4, y: -2}
+  Properties:
+    Position: {x: -4, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &411100119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,9 +1972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -3, y: 2}
+  Properties:
+    Position: {x: -3, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &478512975
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,9 +2079,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 2, y: 0}
+  Properties:
+    Position: {x: 2, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &485640079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,9 +2186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 2, y: 2}
+  Properties:
+    Position: {x: 2, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &485881051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,9 +2293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -3, y: 0}
+  Properties:
+    Position: {x: -3, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &550188226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2411,9 +2400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 1, y: 0}
+  Properties:
+    Position: {x: 1, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &552091751
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,9 +2507,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -1, y: -2}
+  Properties:
+    Position: {x: -1, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &578268325
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,9 +3007,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 1, y: -1}
+  Properties:
+    Position: {x: 1, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &746192288
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,9 +3393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -1, y: 0}
+  Properties:
+    Position: {x: -1, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &837846249
 GameObject:
   m_ObjectHideFlags: 0
@@ -3511,9 +3500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -2, y: -1}
+  Properties:
+    Position: {x: -2, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &855738707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3618,9 +3607,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 3, y: -1}
+  Properties:
+    Position: {x: 3, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &895563904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3809,9 +3798,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 4, y: 1}
+  Properties:
+    Position: {x: 4, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &947433501
 GameObject:
   m_ObjectHideFlags: 0
@@ -3952,9 +3941,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 1, y: -2}
+  Properties:
+    Position: {x: 1, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &959627356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,9 +4048,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -3, y: 1}
+  Properties:
+    Position: {x: -3, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &982656310
 GameObject:
   m_ObjectHideFlags: 0
@@ -4166,9 +4155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 4, y: -1}
+  Properties:
+    Position: {x: 4, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1010678904
 GameObject:
   m_ObjectHideFlags: 0
@@ -4179,7 +4168,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1010678910}
   - component: {fileID: 1010678909}
-  - component: {fileID: 1010678908}
   - component: {fileID: 1010678907}
   - component: {fileID: 1010678906}
   - component: {fileID: 1010678905}
@@ -4248,22 +4236,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010678904}
   m_Mesh: {fileID: 4300000, guid: 03424ba550bea459a865fc0dd71dd777, type: 3}
---- !u!114 &1010678908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010678904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb4ac2b49503412eada95cd6f002aeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NormalColor: {r: 0.8666667, g: 0.92156863, b: 0.7137255, a: 1}
-  HighlightedColor: {r: 0.7647059, g: 0.6784314, b: 0.3372549, a: 1}
-  PressedColor: {r: 0.3019608, g: 0.0627451, b: 0.03529412, a: 1}
-  _clickable: 1
 --- !u!114 &1010678909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4276,17 +4248,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef5af6988ad4b31b8288621f4a853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Competition
-  Team: 0
-  Type: 1
-  StartingHealth: 200
-  Speed: 3
-  Antagonisms: []
-  Supports: []
-  Space: {fileID: 2077319345}
-  HasMoved: 0
-  HasAttacked: 0
-  _health: 0
+  NormalColor: {r: 0.8666667, g: 0.92156863, b: 0.7137255, a: 1}
+  HighlightedColor: {r: 0.7647059, g: 0.6784314, b: 0.3372549, a: 1}
+  PressedColor: {r: 0.46666667, g: 0.23137255, b: 0.10980392, a: 1}
+  _clickable: 1
+  Properties:
+    Name: Competition
+    Team: 0
+    Type: 1
+    StartingHealth: 200
+    Speed: 3
+    Antagonisms: []
+    Supports: []
+    HasMoved: 0
+    HasAttacked: 0
+    _health: 0
 --- !u!4 &1010678910
 Transform:
   m_ObjectHideFlags: 0
@@ -4294,12 +4270,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010678904}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 5194640}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117645585
 GameObject:
@@ -4506,9 +4482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -2, y: 2}
+  Properties:
+    Position: {x: -2, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1173488816
 GameObject:
   m_ObjectHideFlags: 0
@@ -4613,9 +4589,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -2, y: -2}
+  Properties:
+    Position: {x: -2, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1176909885
 GameObject:
   m_ObjectHideFlags: 0
@@ -4646,7 +4622,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4, y: 0.29, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 88046786}
   m_Father: {fileID: 895563906}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4720,9 +4697,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -4, y: 1}
+  Properties:
+    Position: {x: -4, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1178247974
 GameObject:
   m_ObjectHideFlags: 0
@@ -4827,9 +4804,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -1, y: 2}
+  Properties:
+    Position: {x: -1, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1189573246
 GameObject:
   m_ObjectHideFlags: 0
@@ -4934,9 +4911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 3, y: 2}
+  Properties:
+    Position: {x: 3, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1205781622
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,9 +5018,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -3, y: -1}
+  Properties:
+    Position: {x: -3, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1351532274
 GameObject:
   m_ObjectHideFlags: 0
@@ -5148,9 +5125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -4, y: 2}
+  Properties:
+    Position: {x: -4, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1374577043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5236,10 +5213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ee24afc21a14cd2abb879e54a918b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPieces:
-  - {fileID: 128192152846149442}
-  - {fileID: 1010678909}
-  - {fileID: 88046785}
   ActionSelectContainer: {fileID: 668861157}
   MoveMenuContainer: {fileID: 947433501}
   ActMenuContainer: {fileID: 1374577043}
@@ -5405,9 +5378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -2, y: 0}
+  Properties:
+    Position: {x: -2, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1602220433
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,9 +5485,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 3, y: -2}
+  Properties:
+    Position: {x: 3, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1629895754
 GameObject:
   m_ObjectHideFlags: 0
@@ -5605,17 +5578,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef5af6988ad4b31b8288621f4a853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Punching Bag
-  Team: 1
-  Type: 2
-  StartingHealth: 50
-  Speed: 6
-  Antagonisms: []
-  Supports: []
-  Space: {fileID: 485881056}
-  HasMoved: 0
-  HasAttacked: 0
-  _health: 0
+  NormalColor: {r: 1, g: 1, b: 1, a: 1}
+  HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  PressedColor: {r: 1, g: 1, b: 1, a: 1}
+  _clickable: 1
+  Properties:
+    Name: Punching Bag
+    Team: 1
+    Type: 2
+    StartingHealth: 50
+    Speed: 6
+    Antagonisms: []
+    Supports: []
+    HasMoved: 0
+    HasAttacked: 0
+    _health: 0
 --- !u!4 &1629895760
 Transform:
   m_ObjectHideFlags: 0
@@ -5623,12 +5600,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629895754}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1761819351}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1651688463
 GameObject:
@@ -5734,9 +5711,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 2, y: 1}
+  Properties:
+    Position: {x: 2, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1749595453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5841,9 +5818,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -1, y: 1}
+  Properties:
+    Position: {x: -1, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1754072522
 GameObject:
   m_ObjectHideFlags: 0
@@ -5948,9 +5925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 3, y: 0}
+  Properties:
+    Position: {x: 3, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1761819350
 GameObject:
   m_ObjectHideFlags: 0
@@ -5981,7 +5958,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4, y: 0.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1629895760}
   m_Father: {fileID: 895563906}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6055,9 +6033,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 4, y: -2}
+  Properties:
+    Position: {x: 4, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1812985036
 GameObject:
   m_ObjectHideFlags: 0
@@ -6162,9 +6140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -2, y: 1}
+  Properties:
+    Position: {x: -2, y: 1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1823866405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6269,9 +6247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 4, y: 2}
+  Properties:
+    Position: {x: 4, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1843874354
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,9 +6354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 1, y: 2}
+  Properties:
+    Position: {x: 1, y: 2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1876625283
 GameObject:
   m_ObjectHideFlags: 0
@@ -6483,9 +6461,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 2, y: -2}
+  Properties:
+    Position: {x: 2, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &1905141290
 GameObject:
   m_ObjectHideFlags: 0
@@ -6664,9 +6642,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 2, y: -1}
+  Properties:
+    Position: {x: 2, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &2034202046
 GameObject:
   m_ObjectHideFlags: 0
@@ -6771,9 +6749,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -1, y: -1}
+  Properties:
+    Position: {x: -1, y: -1}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &2052627684
 GameObject:
   m_ObjectHideFlags: 0
@@ -6878,9 +6856,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: 0}
+  Properties:
+    Position: {x: 0, y: 0}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 128192152846149442}
 --- !u!1 &2059532644
 GameObject:
   m_ObjectHideFlags: 0
@@ -7188,9 +7166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369a4a7cf1831429da34acc9c6967804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: -3, y: -2}
+  Properties:
+    Position: {x: -3, y: -2}
   OffsetFromGroundLevel: {x: 0, y: 0.5, z: 0}
-  _currentPiece: {fileID: 0}
 --- !u!1 &2078845094
 GameObject:
   m_ObjectHideFlags: 0
@@ -7449,7 +7427,6 @@ GameObject:
   m_Component:
   - component: {fileID: 128192152846252896}
   - component: {fileID: 128192152846149442}
-  - component: {fileID: 128192152846149441}
   - component: {fileID: 128192152844958528}
   - component: {fileID: 128192152843958656}
   - component: {fileID: 128192152846149443}
@@ -7460,22 +7437,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &128192152846149441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128192152846149440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb4ac2b49503412eada95cd6f002aeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NormalColor: {r: 0.8666667, g: 0.92156863, b: 0.7137255, a: 1}
-  HighlightedColor: {r: 0.7647059, g: 0.6784314, b: 0.3372549, a: 1}
-  PressedColor: {r: 0.3019608, g: 0.0627451, b: 0.03529412, a: 1}
-  _clickable: 1
 --- !u!114 &128192152846149442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7488,17 +7449,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cef5af6988ad4b31b8288621f4a853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Humility
-  Team: 0
-  Type: 0
-  StartingHealth: 100
-  Speed: 3
-  Antagonisms: []
-  Supports: []
-  Space: {fileID: 368078824}
-  HasMoved: 0
-  HasAttacked: 0
-  _health: 0
+  NormalColor: {r: 0.8666667, g: 0.92156863, b: 0.7137255, a: 1}
+  HighlightedColor: {r: 0.7647059, g: 0.6784314, b: 0.3372549, a: 1}
+  PressedColor: {r: 0.46666667, g: 0.23137255, b: 0.10980392, a: 1}
+  _clickable: 1
+  Properties:
+    Name: Humility
+    Team: 0
+    Type: 0
+    StartingHealth: 100
+    Speed: 3
+    Antagonisms: []
+    Supports: []
+    HasMoved: 0
+    HasAttacked: 0
+    _health: 0
 --- !u!65 &128192152846149443
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7519,10 +7484,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128192152846149440}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 287978984}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

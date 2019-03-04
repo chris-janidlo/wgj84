@@ -8,7 +8,6 @@ using crass;
 
 public class UIStateManager : Singleton<UIStateManager>
 {
-    public List<BoardPiece> PlayerPieces;
     public GameObject ActionSelectContainer, MoveMenuContainer, ActMenuContainer;
     public Button MoveButton, ActButton, AntagonizeButton, SupportButton, ContextButton;
     public TextMeshProUGUI NameplateText, ContextButtonText, AntagonizeText, SupportText;
@@ -18,12 +17,12 @@ public class UIStateManager : Singleton<UIStateManager>
         none, actionMenu, actMenu, moveMenu
     }
 
-    BoardPiece selectedPiece;
+    BoardPieceVis selectedPiece;
     AttackCategory selectedCategory;
-    List<BoardSpace> movableSpaces;
-    Dictionary<BoardSpace, Color> spaceColorMemory;
-    List<BoardPiece> attackablePieces;
-    Dictionary<BoardPiece, Color> pieceColorMemory;
+    List<BoardSpaceVis> movableSpaces;
+    List<BoardPieceVis> attackablePieces;
+    Dictionary<BoardSpaceVis, Color> spaceColorMemory;
+    Dictionary<BoardPieceVis, Color> pieceColorMemory;
 
     state _currentState;
     state currentState
@@ -44,12 +43,12 @@ public class UIStateManager : Singleton<UIStateManager>
 
     void Start ()
     {
-        spaceColorMemory = new Dictionary<BoardSpace, Color>();
-        pieceColorMemory = new Dictionary<BoardPiece, Color>();
+        spaceColorMemory = new Dictionary<BoardSpaceVis, Color>();
+        pieceColorMemory = new Dictionary<BoardPieceVis, Color>();
 
-        foreach (var p in PlayerPieces)
+        foreach (var p in BoardManager.Instance.Pieces.Where(p => p.Properties.Team == Team.Player))
         {
-            p.GetComponent<Button3D>().OnClickCallback += clickPiece;
+            p.OnClickCallback += clickPiece;
         }
 
         ContextButton.onClick.AddListener(clickContextButton);
@@ -63,18 +62,18 @@ public class UIStateManager : Singleton<UIStateManager>
 
     void Update ()
     {
-        NameplateText.text = selectedPiece?.Name ?? "<nothing selected>";
+        NameplateText.text = selectedPiece?.Properties.Name ?? "<nothing selected>";
         if (currentState == state.actMenu)
         {
-            AntagonizeText.text = selectedPiece.NextAntagonism.Dialog[0];
-            SupportText.text = selectedPiece.NextSupport.Dialog[0];
+            AntagonizeText.text = selectedPiece.Properties.NextAntagonism.Dialog[0];
+            SupportText.text = selectedPiece.Properties.NextSupport.Dialog[0];
         }
         ContextButtonText.text = (currentState == state.none) ? "End Turn" : "Back";
 
         if (currentState == state.actionMenu)
         {
-            MoveButton.interactable = !selectedPiece.HasMoved;
-            ActButton.interactable = !selectedPiece.HasAttacked;
+            MoveButton.interactable = !selectedPiece.Properties.HasMoved;
+            ActButton.interactable = !selectedPiece.Properties.HasAttacked;
         }
 
         ActionSelectContainer.SetActive(currentState == state.actionMenu);
@@ -84,7 +83,7 @@ public class UIStateManager : Singleton<UIStateManager>
 
     void clickPiece (object sender, System.EventArgs e)
     {
-        selectedPiece = ((Button3D) sender).GetComponent<BoardPiece>();
+        selectedPiece = (BoardPieceVis) sender;
         currentState = state.actionMenu;
     }
 
@@ -92,14 +91,9 @@ public class UIStateManager : Singleton<UIStateManager>
     {
         currentState = state.moveMenu;
 
-        movableSpaces = BoardManager.Instance.GetCircle
-        (
-            selectedPiece.Space.Position,
-            selectedPiece.Speed,
-            s => s.CurrentPiece == null
-        );
+        movableSpaces = BoardManager.Instance.GetMoveableSpaceVis(selectedPiece);
 
-        foreach (BoardSpace s in movableSpaces)
+        foreach (BoardSpaceVis s in movableSpaces)
         {
             spaceColorMemory[s] = s.GetComponent<Renderer>().material.color;
             var button = s.gameObject.AddComponent<GroundMoveButton>();
@@ -109,14 +103,14 @@ public class UIStateManager : Singleton<UIStateManager>
 
     void clickMovableGround (object sender, System.EventArgs e)
     {
-        var s = ((GroundMoveButton) sender).GetComponent<BoardSpace>();
+        var s = ((GroundMoveButton) sender).GetComponent<BoardSpaceVis>();
         BoardManager.Instance.DoMove(selectedPiece, s);
         currentState = state.actionMenu;
     }
 
     void clearGroundButtons ()
     {
-        foreach (BoardSpace s in movableSpaces)
+        foreach (BoardSpaceVis s in movableSpaces)
         {
             var button = s.GetComponent<GroundMoveButton>();
             button.OnClickCallback -= clickMovableGround;
@@ -152,13 +146,7 @@ public class UIStateManager : Singleton<UIStateManager>
     {
         selectedCategory = category;
 
-        attackablePieces = BoardManager.Instance.GetCircle
-        (
-            selectedPiece.Space.Position,
-            selectedPiece.PeekAttack(category).Range,
-            s => s.CurrentPiece != null && s.CurrentPiece.Team == Team.AI
-        )
-        .Select(s => s.CurrentPiece).ToList();
+        attackablePieces = BoardManager.Instance.GetAttackablePieceVis(selectedPiece, selectedCategory);
 
         foreach (var p in attackablePieces)
         {
@@ -170,14 +158,14 @@ public class UIStateManager : Singleton<UIStateManager>
 
     void clickAttackablePiece (object sender, System.EventArgs e)
     {
-        var enemy = ((AttackEnemyButton) sender).GetComponent<BoardPiece>();
+        var enemy = ((AttackEnemyButton) sender).GetComponent<BoardPieceVis>();
         BoardManager.Instance.DoAttack(selectedCategory, enemy, selectedPiece);
         currentState = state.actionMenu;
     }
 
     void clearAttackButtons ()
     {
-        foreach (BoardPiece p in attackablePieces)
+        foreach (BoardPieceVis p in attackablePieces)
         {
             var button = p.GetComponent<AttackEnemyButton>();
             button.OnClickCallback -= clickAttackablePiece;

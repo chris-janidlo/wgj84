@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardPiece : MonoBehaviour
+[Serializable]
+public class BoardPiece
 {
     public string Name;
     public Team Team;
@@ -10,8 +12,9 @@ public class BoardPiece : MonoBehaviour
     public int StartingHealth;
     public int Speed;
     public List<Attack> Antagonisms, Supports;
-    public BoardSpace Space;
     public bool HasMoved, HasAttacked;
+
+    public event EventHandler HasDied;
 
     int currentAnt, currentSup;
 
@@ -25,29 +28,18 @@ public class BoardPiece : MonoBehaviour
             _health = value;
             if (_health <= 0)
             {
-                die();
+                var temp = HasDied;
+                if (temp != null)
+                {
+                    temp(this, null);
+                }
             }
         }
     }
 
-    public Vector2Int Position => Space.Position;
     public float PercentHealth => (float) Health / StartingHealth;
     public Attack NextAntagonism => Antagonisms[currentAnt];
     public Attack NextSupport => Supports[currentSup];
-
-    void Start ()
-    {
-        Health = StartingHealth;
-        if (Space.CurrentPiece == null)
-        {
-            Space.CurrentPiece = this;
-        }
-    }
-
-    void Update ()
-    {
-        transform.position = Vector3.Lerp(transform.position, Space.GroundLevel, 0.8f * Time.deltaTime);
-    }
 
     public Attack PopAttack (AttackCategory category)
     {
@@ -74,9 +66,24 @@ public class BoardPiece : MonoBehaviour
         }
     }
 
-    void die ()
+    // shallow clone because we don't care if antagonisms and supports refer to the same list
+    public BoardPiece Clone ()
     {
-        Destroy(gameObject);
+        return new BoardPiece
+        {
+            Name = Name,
+            Team = Team,
+            Type = Type,
+            StartingHealth = StartingHealth,
+            Speed = Speed,
+            Antagonisms = Antagonisms,
+            Supports = Supports,
+            HasMoved = HasMoved,
+            HasAttacked = HasAttacked,
+            currentAnt = currentAnt,
+            currentSup = currentSup,
+            _health = _health
+        };
     }
 }
 
