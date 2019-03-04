@@ -18,6 +18,8 @@ public class BoardPieceVis : Button3D
     {
         transform.position = Vector3.Lerp(transform.position, currentSpaceVis.GroundLevel, 0.8f * Time.deltaTime);
 
+        transform.localScale = new Vector3(1, Properties.PercentHealth, 1);
+
         Clickable = !(Properties.Team == Team.AI || (Properties.HasAttacked && Properties.HasMoved));
     }
 

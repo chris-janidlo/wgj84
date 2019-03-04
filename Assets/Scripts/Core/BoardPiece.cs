@@ -12,7 +12,7 @@ public class BoardPiece
     public int StartingHealth;
     public int Speed;
     public List<Attack> Antagonisms, Supports;
-    public bool HasMoved, HasAttacked;
+    public bool HasMoved, HasAttacked, IsDead;
 
     public event EventHandler HasDied;
 
@@ -22,12 +22,20 @@ public class BoardPiece
     int _health;
     public int Health
     {
-        get => _health;
+        get
+        {
+            if (_health <= 0 && !IsDead)
+            {
+                _health = StartingHealth;
+            }
+            return _health;
+        }
         set
         {
             _health = value;
-            if (_health <= 0)
+            if (value <= 0)
             {
+                IsDead = true;
                 var temp = HasDied;
                 if (temp != null)
                 {
@@ -80,6 +88,7 @@ public class BoardPiece
             Supports = Supports,
             HasMoved = HasMoved,
             HasAttacked = HasAttacked,
+            IsDead = IsDead,
             currentAnt = currentAnt,
             currentSup = currentSup,
             _health = _health
