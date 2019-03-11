@@ -1,0 +1,44 @@
+{
+	"Name": "Egotism",
+	"Team": 0,
+	"Type": 0,
+	"StartingHealth": 100,
+	"Speed": 4,
+	"Antagonisms": [
+		{
+			"DialogPreview": "Insult his intelligence",
+			"Dialog": [
+				"So I heard you failed the chemistry exam.",
+				"What about it?",
+				"Dad's going to be so mad at you. How are you going to tell him you failed when you studied so hard?",
+				"I'll fucking figure it out. Go mind someone else's business."
+			],
+			"Damage": 5,
+			"Range": 10
+		},
+		{
+			"DialogPreview": "Talk about college",
+			"Dialog": [
+				"Nice job getting into state.",
+				"Yeah, uh, thanks.",
+				"That makes you, what, 1 for 4 so far?",
+				"Bro, your face is about to be 1 for 4 if you don't shut your mouth."
+			],
+			"Damage": 7,
+			"Range": 3
+		}
+	],
+	"Supports": [
+		{
+			"DialogPreview": "Talk about the meet",
+			"Dialog": [
+				"Congratulations on 1st place at the meet.",
+				"Thanks?",
+				"That was seriously impressive, you beat some good swimmers out there.",
+				"Appreciate it."
+			],
+			"Damage": 10,
+			"Range": 1
+		}
+	]
+}

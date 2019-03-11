@@ -61,7 +61,6 @@ public class Board
 
                 bool inRange = (point - center).sqrMagnitude <= range * range;
                 bool isValid = (filter != null) ? filter(space) : true;
-                Debug.Log(filter);
 
                 if (inRange && isValid)
                 {
@@ -132,6 +131,9 @@ public class Board
     {
         shooter.HasAttacked = true;
         var attack = shooter.PopAttack(category);
+
+        // int damage = attack.Damage;
+
         var coverHit = GetCover(target, shooter).TryHit();
 
         if (coverHit == null)

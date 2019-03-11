@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class BoardPieceVis : Button3D
 {
-    public BoardPiece Properties;
+    public TextAsset Data;
+
+    BoardPiece _properties;
+    public BoardPiece Properties
+    {
+        get
+        {
+            if (_properties == null)
+            {
+                _properties = JsonUtility.FromJson<BoardPiece>(Data.text);
+            }
+            return _properties;
+        }
+    }
 
     BoardSpaceVis currentSpaceVis => GetComponentInParent<BoardSpaceVis>();
 
@@ -19,8 +32,6 @@ public class BoardPieceVis : Button3D
         transform.position = Vector3.Lerp(transform.position, currentSpaceVis.GroundLevel, 0.8f * Time.deltaTime);
 
         transform.localScale = new Vector3(1, Properties.PercentHealth, 1);
-
-        Clickable = !(Properties.Team == Team.AI || (Properties.HasAttacked && Properties.HasMoved));
     }
 
     void die (object sender, System.EventArgs e)

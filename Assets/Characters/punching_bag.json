@@ -1,0 +1,38 @@
+{
+	"Name": "Punching Bag",
+	"Team": 1,
+	"Type": 0,
+	"StartingHealth": 100,
+	"Speed": 4,
+	"Antagonisms": [
+		{
+			"DialogPreview": "",
+			"Dialog": [
+				"...",
+				"Shut up, punching bag, no one asked."
+			],
+			"Damage": 5,
+			"Range": 4
+		},
+		{
+			"DialogPreview": "",
+			"Dialog": [
+				"...",
+				"Damn, punching bag, that strikes a raw nerve in a really unnecessary way."
+			],
+			"Damage": 7,
+			"Range": 3
+		}
+	],
+	"Supports": [
+		{
+			"DialogPreview": "",
+			"Dialog": [
+				"...",
+				"Thanks, punching bag, that means a lot to me."
+			],
+			"Damage": 10,
+			"Range": 1
+		}
+	]
+}

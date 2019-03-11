@@ -22,7 +22,6 @@ public class UIStateManager : Singleton<UIStateManager>
     List<BoardSpaceVis> movableSpaces;
     List<BoardPieceVis> attackablePieces;
     Dictionary<BoardSpaceVis, Color> spaceColorMemory;
-    Dictionary<BoardPieceVis, Color> pieceColorMemory;
 
     state _currentState;
     state currentState
@@ -44,11 +43,19 @@ public class UIStateManager : Singleton<UIStateManager>
     void Start ()
     {
         spaceColorMemory = new Dictionary<BoardSpaceVis, Color>();
-        pieceColorMemory = new Dictionary<BoardPieceVis, Color>();
 
-        foreach (var p in BoardManager.Instance.Pieces.Where(p => p.Properties.Team == Team.Player))
+        foreach (var p in BoardManager.Instance.Pieces)
         {
-            p.OnClickCallback += clickPiece;
+            if (p.Properties.Team == Team.Player)
+            {
+                p.Clickable = true;
+                p.OnClickCallback += clickPlayerPiece;
+            }
+            else
+            {
+                p.Clickable = false;
+                p.OnClickCallback += clickAIPiece;
+            }
         }
 
         ContextButton.onClick.AddListener(clickContextButton);
@@ -65,8 +72,8 @@ public class UIStateManager : Singleton<UIStateManager>
         NameplateText.text = selectedPiece?.Properties.Name ?? "<nothing selected>";
         if (currentState == state.actMenu)
         {
-            AntagonizeText.text = selectedPiece.Properties.NextAntagonism.Dialog[0];
-            SupportText.text = selectedPiece.Properties.NextSupport.Dialog[0];
+            AntagonizeText.text = selectedPiece.Properties.NextAntagonism.DialogPreview;
+            SupportText.text = selectedPiece.Properties.NextSupport.DialogPreview;
         }
         ContextButtonText.text = (currentState == state.none) ? "End Turn" : "Back";
 
@@ -81,7 +88,7 @@ public class UIStateManager : Singleton<UIStateManager>
         ActMenuContainer.SetActive(currentState == state.actMenu);
     }
 
-    void clickPiece (object sender, System.EventArgs e)
+    void clickPlayerPiece (object sender, System.EventArgs e)
     {
         selectedPiece = (BoardPieceVis) sender;
         currentState = state.actionMenu;
@@ -128,6 +135,11 @@ public class UIStateManager : Singleton<UIStateManager>
         {
             case state.none:
                 // end turn
+                foreach (var p in BoardManager.Instance.Pieces)
+                {
+                    p.Properties.HasAttacked = false;
+                    p.Properties.HasMoved = false;
+                }
                 break;
 
             case state.actionMenu:
@@ -150,15 +162,13 @@ public class UIStateManager : Singleton<UIStateManager>
 
         foreach (var p in attackablePieces)
         {
-            pieceColorMemory[p] = p.GetComponent<Renderer>().material.color;
-            var button = p.gameObject.AddComponent<AttackEnemyButton>();
-            button.OnClickCallback += clickAttackablePiece;
+            p.Clickable = true;
         }
     }
 
-    void clickAttackablePiece (object sender, System.EventArgs e)
+    void clickAIPiece (object sender, System.EventArgs e)
     {
-        var enemy = ((AttackEnemyButton) sender).GetComponent<BoardPieceVis>();
+        var enemy = (BoardPieceVis) sender;
         BoardManager.Instance.DoAttack(selectedCategory, enemy, selectedPiece);
         currentState = state.actionMenu;
     }
@@ -167,13 +177,9 @@ public class UIStateManager : Singleton<UIStateManager>
     {
         foreach (BoardPieceVis p in attackablePieces)
         {
-            var button = p.GetComponent<AttackEnemyButton>();
-            button.OnClickCallback -= clickAttackablePiece;
-            Destroy(button);
-            p.GetComponent<Renderer>().material.color = pieceColorMemory[p];
+            p.Clickable = false;
         }
 
         attackablePieces = null;
-        pieceColorMemory.Clear();
     }
 }

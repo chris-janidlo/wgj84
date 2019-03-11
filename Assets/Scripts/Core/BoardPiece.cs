@@ -96,6 +96,25 @@ public class BoardPiece
     }
 }
 
+[Serializable]
+public class Attack
+{
+    public string DialogPreview;
+    public List<string> Dialog;
+    public int Damage;
+    public int Range;
+}
+
+public enum AttackType
+{
+    Social, Physical, Emotional
+}
+
+public enum AttackCategory
+{
+    Antagonistic, Supporting
+}
+
 public enum Team
 {
     Player, AI
