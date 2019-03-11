@@ -46,16 +46,9 @@ public class UIStateManager : Singleton<UIStateManager>
 
         foreach (var p in BoardManager.Instance.Pieces)
         {
-            if (p.Properties.Team == Team.Player)
-            {
-                p.Clickable = true;
-                p.OnClickCallback += clickPlayerPiece;
-            }
-            else
-            {
-                p.Clickable = false;
-                p.OnClickCallback += clickAIPiece;
-            }
+            bool isPlayer = p.Properties.Team == Team.Player;
+            p.Clickable = isPlayer;
+            p.OnClickCallback += isPlayer ? (System.EventHandler) clickPlayerPiece : clickAIPiece;
         }
 
         ContextButton.onClick.AddListener(clickContextButton);
