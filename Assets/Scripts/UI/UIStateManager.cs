@@ -8,6 +8,7 @@ using crass;
 
 public class UIStateManager : Singleton<UIStateManager>
 {
+    public Color MovableNormal, MovableHighlighted, MovablePressed;
     public GameObject ActionSelectContainer, MoveMenuContainer, ActMenuContainer;
     public Button MoveButton, ActButton, AntagonizeButton, SupportButton, ContextButton;
     public TextMeshProUGUI NameplateText, ContextButtonText, AntagonizeText, SupportText;
@@ -98,6 +99,9 @@ public class UIStateManager : Singleton<UIStateManager>
             spaceColorMemory[s] = s.GetComponent<Renderer>().material.color;
             var button = s.gameObject.AddComponent<GroundMoveButton>();
             button.OnClickCallback += clickMovableGround;
+            button.NormalColor = MovableNormal;
+            button.HighlightedColor = MovableHighlighted;
+            button.PressedColor = MovablePressed;
         }
     }
 

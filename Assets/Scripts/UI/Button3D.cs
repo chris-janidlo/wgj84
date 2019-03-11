@@ -7,9 +7,49 @@ using UnityEngine.EventSystems;
 
 public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-	public Color NormalColor = Color.white,
-	             HighlightedColor = Color.white,
-				 PressedColor = Color.white;
+	[SerializeField]
+	Color _normalColor = Color.white,
+	      _highlightedColor = Color.white,
+	      _pressedColor = Color.white;
+
+	public Color NormalColor
+	{
+		get => _normalColor;
+		set
+		{
+			_normalColor = value;
+			if (!hovered && !pressed)
+			{
+				rend.material.color = _normalColor;
+			}
+		}
+	}
+
+	public Color HighlightedColor
+	{
+		get => _highlightedColor;
+		set
+		{
+			_highlightedColor = value;
+			if ((hovered && !pressed) || (!hovered && pressed))
+			{
+				rend.material.color = _highlightedColor;
+			}
+		}
+	}
+
+	public Color PressedColor
+	{
+		get => _pressedColor;
+		set
+		{
+			_pressedColor = value;
+			if (hovered && pressed)
+			{
+				rend.material.color = _pressedColor;
+			}
+		}
+	}
 	// TODO:
 	// public float FadeDuration;
 
