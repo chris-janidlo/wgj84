@@ -19,10 +19,7 @@ public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool _clickable = true;
 	public bool Clickable
 	{
-		get
-		{
-			return _clickable;
-		}
+		get => _clickable;
 		set
 		{
 			if (!value) pressed = false;
