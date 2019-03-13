@@ -7,113 +7,71 @@ using UnityEngine.EventSystems;
 
 public class Button3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-	[SerializeField]
-	Color _normalColor = Color.white,
-	      _highlightedColor = Color.white,
-	      _pressedColor = Color.white;
-
-	public Color NormalColor
-	{
-		get => _normalColor;
-		set
-		{
-			_normalColor = value;
-			if (!hovered && !pressed)
-			{
-				rend.material.color = _normalColor;
-			}
-		}
-	}
-
-	public Color HighlightedColor
-	{
-		get => _highlightedColor;
-		set
-		{
-			_highlightedColor = value;
-			if ((hovered && !pressed) || (!hovered && pressed))
-			{
-				rend.material.color = _highlightedColor;
-			}
-		}
-	}
-
-	public Color PressedColor
-	{
-		get => _pressedColor;
-		set
-		{
-			_pressedColor = value;
-			if (hovered && pressed)
-			{
-				rend.material.color = _pressedColor;
-			}
-		}
-	}
-	// TODO:
-	// public float FadeDuration;
-
-	public event EventHandler OnPointerEnterCallback, OnPointerExitCallback, OnClickCallback;
+	public event Action<Button3D> OnClickCallback;
 
     [SerializeField]
-	bool _clickable = true;
-	public bool Clickable
+	bool _interactable = true;
+	public bool Interactable
 	{
-		get => _clickable;
+		get => _interactable;
 		set
 		{
 			if (!value) pressed = false;
-			_clickable = value;
+			_interactable = value;
+			stateChange(value ? state.idle : state.disabled);
 		}
+	}
+
+	protected enum state
+	{
+		disabled, idle, hovered, pressed_away, pressed_over
 	}
 
 	bool hovered, pressed;
 
-    Renderer rend;
-
-    protected virtual void Awake ()
-    {
-        rend = GetComponent<Renderer>();
-		rend.material.color = NormalColor;
-    }
-
 	public void OnPointerEnter (PointerEventData eventData)
 	{
-		hovered = true;
-		rend.material.color = pressed ? PressedColor : HighlightedColor;
+		if (!Interactable) return;
 
-        threadSafeCallback(OnPointerEnterCallback);
+		hovered = true;
+
+		stateChange(pressed ? state.pressed_over : state.hovered);
 	}
 
 	public void OnPointerExit (PointerEventData eventData)
 	{
-		hovered = false;
-		rend.material.color = pressed ? HighlightedColor : NormalColor;
+		if (!Interactable) return;
 
-        threadSafeCallback(OnPointerExitCallback);
+		hovered = false;
+
+		stateChange(pressed ? state.pressed_away : state.idle);
 	}
 
-	public void OnPointerDown(PointerEventData eventData)
+	public void OnPointerDown (PointerEventData eventData)
 	{
-		if (!Clickable) return;
+		if (!Interactable) return;
 
 		pressed = true;
-		rend.material.color = PressedColor;
+
+		stateChange(state.pressed_over);
 	}
 
-	public void OnPointerUp(PointerEventData eventData)
+	public void OnPointerUp (PointerEventData eventData)
 	{
-		if (!Clickable) return;
+		if (!Interactable) return;
+
+		if (hovered && pressed)
+		{
+			Action<Button3D> temp = OnClickCallback;
+			if (temp != null)
+				temp(this);
+		}
 
 		pressed = false;
-		rend.material.color = NormalColor;
 
-		if (hovered) threadSafeCallback(OnClickCallback);
+		// check interactable because OnClickCallback may have changed it
+		if (Interactable) stateChange(hovered ? state.hovered : state.idle);
 	}
 
-    void threadSafeCallback (EventHandler callback)
-    {
-        EventHandler temp = callback;
-        if (temp != null) temp(this, null);
-    }
+	protected virtual void stateChange (state newValue) {}
 }

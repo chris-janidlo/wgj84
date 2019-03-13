@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardPieceVis : Button3D
+public class BoardPieceVis : Button3DColor
 {
     public TextAsset Data;
 
@@ -19,17 +19,16 @@ public class BoardPieceVis : Button3D
         }
     }
 
-    BoardSpaceVis currentSpaceVis => GetComponentInParent<BoardSpaceVis>();
+    public BoardSpaceVis CurrentSpaceVis { get; set; }
 
-    protected override void Awake ()
+    void Awake ()
     {
-        base.Awake();
         Properties.HasDied += die;
     }
 
     void Update ()
     {
-        transform.position = Vector3.Lerp(transform.position, currentSpaceVis.GroundLevel, 0.8f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, CurrentSpaceVis.GroundLevel, 0.8f * Time.deltaTime);
 
         transform.localScale = new Vector3(1, Properties.PercentHealth, 1);
     }

@@ -22,6 +22,11 @@ public class BoardManager : Singleton<BoardManager>
         {
             var p = s.GetComponentInChildren<BoardPieceVis>();
             state.Add(s.Properties, p?.Properties);
+            if (p != null)
+            {
+                p.CurrentSpaceVis = s;
+                p.transform.parent = transform;
+            }
         }
 
         Board = new Board(state);
@@ -50,7 +55,7 @@ public class BoardManager : Singleton<BoardManager>
     public void DoMove (BoardPieceVis mover, BoardSpaceVis target)
     {
         Board.DoMove(mover.Properties, target.Properties);
-        mover.transform.parent = target.transform;
+        mover.CurrentSpaceVis = target;
     }
 
     public void DoAttack (AttackCategory category, BoardPieceVis target, BoardPieceVis shooter)
